@@ -54,6 +54,8 @@ d_tipo_asenta -> name string(20)
 
 ![Diagrama Entidad Relacion](/doc/assets/der.png)
 
+4. ### Se crean las migraciones en el proyecto de laravel.
+
 ### Ejemplo de respuesta esperada
 
 ``` JSON
