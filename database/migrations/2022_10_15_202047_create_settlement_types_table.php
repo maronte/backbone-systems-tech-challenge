@@ -17,6 +17,9 @@ return new class extends Migration
             $table->tinyInteger(column: 'id', unsigned: true);
             $table->string(column: 'name', length: 50);
             $table->timestamps();
+
+            // Constraints
+            $table->primary('id');
         });
     }
 

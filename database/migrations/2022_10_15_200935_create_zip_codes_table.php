@@ -21,6 +21,9 @@ return new class extends Migration
             $table->foreignId('municipality_id');
             $table->timestamps();
 
+            // Constraints
+            $table->primary('id');
+
             // Relations
             $table->foreign('federal_entity_id')->references('id')->on('federal_entities');
             $table->foreign('municipality_id')->references('id')->on('municipalities');

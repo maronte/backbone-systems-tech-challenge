@@ -14,9 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('federal_entities', function (Blueprint $table) {
+            // Columns
             $table->tinyInteger(column: 'id', unsigned: true);
             $table->string(column: 'name', length: 50);
             $table->timestamps();
+
+            // Constraints
+            $table->primary('id');
         });
     }
 
