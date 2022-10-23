@@ -91,6 +91,14 @@ procesados por el preprocesador de información. Agrupa todos los registros por 
 y de acuerdo al orden de creación de tablas (para no tener conflictos de llaves foráneas)
 se insertan los registros en masa por tabla.
 
+9. ### Crear relaciones en los modelos y exponer la consulta como endpoint.
+
+Se añadirán las relaciones en los modelos para poder exponer la consulta de codigos postales como un endpoint con la estructura definida.
+
+10. ### Crear recursos laravel para estructurar la respuesta del servicio según lo esperado.
+
+Una vez creada la consulta correctamente a la base de datos de codigos postales se crean recursos de laravel para darle el formato esperado según la prueba técnica.
+
 ### Ejemplo de respuesta esperada
 
 ``` JSON
