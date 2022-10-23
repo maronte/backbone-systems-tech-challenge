@@ -22,7 +22,7 @@ test('should return data cleaned', function () {
         'c_tipo_asenta' => 9,
         'c_mnpio' => 10,
         'id_asenta_cpcons' => 1,
-        'd_zona' => 'Urbano',
+        'd_zona' => 'URBANO',
         'c_cve_ciudad' => '01',
     ];
     $dataToProcces = [

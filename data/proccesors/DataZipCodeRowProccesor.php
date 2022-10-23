@@ -22,6 +22,13 @@ class DataZipCodeRowProccesor
     protected $municipality = null;
 
     /**
+     * Last municipality id registered.
+     *
+     * @var string
+     */
+    public $municipalityId = 0;
+
+    /**
      * Last zip code registered.
      *
      * @var string
@@ -51,6 +58,7 @@ class DataZipCodeRowProccesor
      * - D_mnpio
      * - d_ciudad
      * - d_asenta
+     * - d_zona
      *
      * @param  array<string>  $row
      * @return array<string|int>
@@ -68,6 +76,10 @@ class DataZipCodeRowProccesor
         $row['D_mnpio'] = Str::upper(Str::ascii($row['D_mnpio']));
         $row['d_ciudad'] = Str::upper(Str::ascii($row['d_ciudad']));
         $row['d_asenta'] = Str::upper(Str::ascii($row['d_asenta']));
+        $row['d_zona'] = Str::upper(Str::ascii($row['d_zona']));
+
+        // Just remove tildes
+        $row['d_tipo_asenta'] = Str::ascii($row['d_tipo_asenta']);
 
         return $row;
     }
@@ -88,6 +100,7 @@ class DataZipCodeRowProccesor
      * - D_mnpio
      * - d_ciudad
      * - d_asenta
+     * - d_zona
      *
      * @param  array<string>  $row
      * @return array This array has the keys:
@@ -110,6 +123,7 @@ class DataZipCodeRowProccesor
         if (! $municipalityHasBeenProcesed) {
             array_push($modelsToCreate, Models::Municipality->name);
             $this->municipality = $row['c_mnpio'];
+            $this->municipalityId++;
         }
 
         $zipCodeHasBeenProcesed = $this->zipCode === $row['d_codigo'];
