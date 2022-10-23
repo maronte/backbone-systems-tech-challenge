@@ -16,6 +16,12 @@ class ZipCodesController extends Controller
      */
     public function show($id)
     {
+        // Validate error route param with 500 as expeted example.
+        $isValidParam = preg_match('/^\d{5}$/', $id);
+        if (! $isValidParam) {
+            return abort(500);
+        }
+
         $zipCodeModels = ZipCode::where('id', $id)->with([
             'federalEntity',
             'settlements.settlementType',
