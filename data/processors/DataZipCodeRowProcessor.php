@@ -2,9 +2,17 @@
 
 namespace Data\Processors;
 
+use App\Models\FederalEntity;
+use App\Models\Municipality;
+use App\Models\Settlement;
+use App\Models\SettlementType;
+use App\Models\ZipCode;
 use Data\Enums\Models;
+use Data\Enums\Tables;
 use Illuminate\Support\Str;
 
+// TODO: añadir formato de acentos tipo "\u00ed" y formatear nulos a string vacios
+// para nombre
 class DataZipCodeRowProcessor
 {
     /**
@@ -26,7 +34,7 @@ class DataZipCodeRowProcessor
      *
      * @var string
      */
-    public $municipalityId = 0;
+    protected $municipalityId = 0;
 
     /**
      * Last zip code registered.
@@ -108,7 +116,7 @@ class DataZipCodeRowProcessor
      * as new file. It has values of the enum Data\Enums\Models.
      * - data: Data to be proccesed already cleaned.
      */
-    public function processRow(array $row): array
+    public function preProcessRow(array $row): array
     {
         $modelsToCreate = [];
         $row = $this->cleanData($row);
@@ -142,5 +150,43 @@ class DataZipCodeRowProcessor
             'modelsToCreate' => $modelsToCreate,
             'data' => $row,
         ];
+    }
+
+    /**
+     * This function procces row of zip code csv file already preprocessed
+     * to transform it into corresponding given associative array model to
+     * store it in an associative array with tables -> models.
+     *
+     * @param  array<array<string|int>>  $rowPreProcessed Array of data preprocessed.
+     * @param  array<array<string|int>>  &$arrayOfModels Array to store models by table name.
+     * @return void
+     */
+    public function processRow(array $preProcessedRow, array &$arrayOfModels): void
+    {
+        $modelsToCreate = $preProcessedRow['modelsToCreate'];
+        $data = $preProcessedRow['data'];
+
+        if (in_array(Models::FederalEntity->name, $modelsToCreate)) {
+            $arrayModel = FederalEntity::mapCsvRowToModelAsArray($data);
+            array_push($arrayOfModels[Tables::federal_entities->name], $arrayModel);
+        }
+
+        if (in_array(Models::Municipality->name, $modelsToCreate)) {
+            $arrayModel = Municipality::mapCsvRowToModelAsArray($data);
+            array_push($arrayOfModels[Tables::municipalities->name], $arrayModel);
+        }
+
+        if (in_array(Models::ZipCode->name, $modelsToCreate)) {
+            $arrayModel = ZipCode::mapCsvRowToModelAsArray($data, $this->municipalityId);
+            array_push($arrayOfModels[Tables::zip_codes->name], $arrayModel);
+        }
+
+        if (in_array(Models::SettlementType->name, $modelsToCreate)) {
+            $arrayModel = SettlementType::mapCsvRowToModelAsArray($data);
+            array_push($arrayOfModels[Tables::settlement_types->name], $arrayModel);
+        }
+
+        $arrayModel = Settlement::mapCsvRowToModelAsArray($data);
+        array_push($arrayOfModels[Tables::settlements->name], $arrayModel);
     }
 }
