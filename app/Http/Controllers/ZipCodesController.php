@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ZipCodeResource;
 use App\Models\ZipCode;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ZipCodesController extends Controller
 {
@@ -16,10 +18,14 @@ class ZipCodesController extends Controller
     {
         $zipCodeModels = ZipCode::where('id', $id)->with([
             'federalEntity',
-            'municipality',
             'settlements.settlementType',
+            'municipality',
         ])->get()->first();
 
-        return $zipCodeModels;
+        if (is_null($zipCodeModels)) {
+            throw new NotFoundHttpException();
+        }
+
+        return new ZipCodeResource($zipCodeModels);
     }
 }
