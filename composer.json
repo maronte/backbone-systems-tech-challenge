@@ -25,7 +25,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Data\\": "data/", 
+            "Data\\Enums\\": "data/enums",
+            "Data\\Processors\\": "data/processors",
+            "Data\\Readers\\": "data/readers",
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
