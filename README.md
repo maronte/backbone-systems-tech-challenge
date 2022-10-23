@@ -99,6 +99,8 @@ Se añadirán las relaciones en los modelos para poder exponer la consulta de co
 
 Una vez creada la consulta correctamente a la base de datos de codigos postales se crean recursos de laravel para darle el formato esperado según la prueba técnica.
 
+11. ### Se implementa swagger como documentación de la API como parte de las buenas practicas.
+
 ### Ejemplo de respuesta esperada
 
 ``` JSON
