@@ -5,7 +5,6 @@ namespace Data\Readers;
 /**
  * This class reads a given csv file that exists into data folder
  * of the project with generators.
- * 
  */
 class CsvFileReader
 {
@@ -16,24 +15,24 @@ class CsvFileReader
     protected $fileManager = null;
 
     /**
-     * Determines up to how many lines to return from the 
+     * Determines up to how many lines to return from the
      * read file.
-     * 
+     *
      * @var string
      */
     protected $linesPerIteration = null;
 
     /**
-     * Determines the separator character of values/colums 
+     * Determines the separator character of values/colums
      * in the csv file.
-     * 
+     *
      * @var string
      */
     protected $fileSeparator = null;
 
     /**
      * Stores the headers of the CSV.
-     * 
+     *
      * @var array<string>
      */
     protected $headers = null;
@@ -43,10 +42,10 @@ class CsvFileReader
      * for each generator. The file will be opened with fopen function
      * so any error that exists for that function also will be throws
      * by this class.
-     * 
-     * @param string $fileName Given file needs to be into "data" directory of the project.
-     * @param string $fileSeparator Sets the separator character of the given csv.
-     * @param int $linesPerIteration Sets the maximum size of rows returned by each iteration of the reader.
+     *
+     * @param  string  $fileName Given file needs to be into "data" directory of the project.
+     * @param  string  $fileSeparator Sets the separator character of the given csv.
+     * @param  int  $linesPerIteration Sets the maximum size of rows returned by each iteration of the reader.
      */
     public function __construct(
         string $fileName,
@@ -63,7 +62,7 @@ class CsvFileReader
     /**
      * This function returns a generator to get one row of the file
      * once by once.
-     * 
+     *
      * @return generator
      */
     protected function getFileGeneratorPerRow()
@@ -71,6 +70,7 @@ class CsvFileReader
         while ($data = fgetcsv(stream: $this->fileManager, separator: $this->fileSeparator)) {
             if (is_null($this->headers)) {
                 $this->headers = $data;
+
                 continue;
             }
             yield $data;
@@ -80,8 +80,8 @@ class CsvFileReader
     /**
      * This function transform given common array with csv row data
      * to an associative array with keys as csv headers.
-     * 
-     * @param array $data Array row of the csv.
+     *
+     * @param  array  $data Array row of the csv.
      * @return array Associative array generated.
      */
     protected function parseDataArrayToHeadersAssociativeArray(array $data)
@@ -96,10 +96,10 @@ class CsvFileReader
 
     /**
      * Gets an iterator that returns an array of rows of the csv file to read.
-     * The array returned will be associative array with keys as csv headers 
-     * and its length will be at least the given lines per iteration 
+     * The array returned will be associative array with keys as csv headers
+     * and its length will be at least the given lines per iteration
      * in the class constructor.
-     * 
+     *
      * @return generator<array>
      */
     public function getRows()
@@ -126,7 +126,7 @@ class CsvFileReader
     /**
      * Close the reader of the file.
      * This function is equals to fclose php function.
-     * 
+     *
      * @return void
      */
     public function finishReader()

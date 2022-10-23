@@ -8,7 +8,7 @@ beforeEach(function () {
 });
 
 afterEach(function () {
-    if (!is_null($this->reader)) {
+    if (! is_null($this->reader)) {
         $this->reader->finishReader();
     }
 });
@@ -24,21 +24,21 @@ test('should read a file as csv with generators', function () {
 
 test('should return an associative array with csv headers as keys', function () {
     $expectedKeys = [
-        "d_codigo",
-        "d_asenta",
-        "d_tipo_asenta",
-        "D_mnpio",
-        "d_estado",
-        "d_ciudad",
-        "d_CP",
-        "c_estado",
-        "c_oficina",
-        "c_CP",
-        "c_tipo_asenta",
-        "c_mnpio",
-        "id_asenta_cpcons",
-        "d_zona",
-        "c_cve_ciudad"
+        'd_codigo',
+        'd_asenta',
+        'd_tipo_asenta',
+        'D_mnpio',
+        'd_estado',
+        'd_ciudad',
+        'd_CP',
+        'c_estado',
+        'c_oficina',
+        'c_CP',
+        'c_tipo_asenta',
+        'c_mnpio',
+        'id_asenta_cpcons',
+        'd_zona',
+        'c_cve_ciudad',
     ];
     $this->reader = new CsvFileReader(fileName: $this->fileNameToTest, linesPerIteration: 1);
     $row = $this->reader->getRows()->current()[0];
