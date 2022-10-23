@@ -1,10 +1,10 @@
 <?php
 
 use Data\Enums\Models;
-use Data\Proccesors\DataZipCodeRowProccesor;
+use Data\Processors\DataZipCodeRowProcessor;
 
 beforeEach(function () {
-    $this->proccesor = new DataZipCodeRowProccesor();
+    $this->proccesor = new DataZipCodeRowProcessor();
 });
 
 test('should return data cleaned', function () {

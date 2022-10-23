@@ -1,11 +1,11 @@
 <?php
 
-namespace Data\Proccesors;
+namespace Data\Processors;
 
 use Data\Enums\Models;
 use Illuminate\Support\Str;
 
-class DataZipCodeRowProccesor
+class DataZipCodeRowProcessor
 {
     /**
      * Last state registered.
