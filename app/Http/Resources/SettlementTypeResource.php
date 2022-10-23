@@ -4,8 +4,27 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @OA\Schema(
+ *     title="SettlementTypeResource",
+ *     description="Settlement type resource model",
+ *     @OA\Xml(
+ *         name="SettlementTypeResource"
+ *     )
+ * )
+ */
 class SettlementTypeResource extends JsonResource
 {
+    /**
+     * @OA\Property(
+     *     title="name",
+     *     description="name of settlement type",
+     *     example="Barrio",
+     *     type="string"
+     * )
+     */
+    private $name;
+
     /**
      * Transform the resource into an array.
      *
