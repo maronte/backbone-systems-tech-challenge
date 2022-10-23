@@ -10,6 +10,13 @@ class SettlementType extends Model
     use HasFactory;
 
     /**
+     * Indicates if the model's ID is auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * Maps the given data of a csv row of the zip file to
      * an associative array with model properties as keys.
      *
