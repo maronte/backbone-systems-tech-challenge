@@ -15,7 +15,8 @@ class SettlementTypeResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name' => $this->name,
+            // Pase this line to javascript utf-8 format because it can have accents
+            'name' => json_encode($this->name),
         ];
     }
 }

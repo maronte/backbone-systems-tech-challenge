@@ -11,8 +11,6 @@ use Data\Enums\Models;
 use Data\Enums\Tables;
 use Illuminate\Support\Str;
 
-// TODO: añadir formato de acentos tipo "\u00ed" y formatear nulos a string vacios
-// para nombre
 class DataZipCodeRowProcessor
 {
     /**
@@ -85,9 +83,6 @@ class DataZipCodeRowProcessor
         $row['d_ciudad'] = Str::upper(Str::ascii($row['d_ciudad']));
         $row['d_asenta'] = Str::upper(Str::ascii($row['d_asenta']));
         $row['d_zona'] = Str::upper(Str::ascii($row['d_zona']));
-
-        // Just remove tildes
-        $row['d_tipo_asenta'] = Str::ascii($row['d_tipo_asenta']);
 
         return $row;
     }
