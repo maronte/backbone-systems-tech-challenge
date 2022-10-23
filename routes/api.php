@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/zip-codes/{id}", [ZipCodesController::class, 'show']);
+Route::get('/zip-codes/{id}', [ZipCodesController::class, 'show']);

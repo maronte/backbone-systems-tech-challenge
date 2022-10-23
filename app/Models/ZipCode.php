@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ZipCode extends Model
 {
@@ -18,7 +17,7 @@ class ZipCode extends Model
      * @var string
      */
     protected $keyType = 'string';
-    
+
     /**
      * Indicates if the model's ID is auto-incrementing.
      *
@@ -46,7 +45,7 @@ class ZipCode extends Model
 
     /**
      * Get the federal entity of the zip code.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne Federal entity relation.
      */
     public function federalEntity(): BelongsTo
@@ -56,7 +55,7 @@ class ZipCode extends Model
 
     /**
      * Get the municipality of the zip code.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne Municipality relation.
      */
     public function municipality(): BelongsTo
@@ -66,7 +65,7 @@ class ZipCode extends Model
 
     /**
      * Get the settlements of the zip code.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne Settlements entity relation.
      */
     public function settlements(): HasMany

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Settlement extends Model
 {
@@ -33,7 +32,7 @@ class Settlement extends Model
 
     /**
      * Get the settlement type of the settlement.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne Settlement type relation.
      */
     public function settlementType(): BelongsTo
@@ -49,7 +48,7 @@ class Settlement extends Model
     protected function zoneType(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value === "U" ? "URBANO" : "RURAL"
+            get: fn ($value) => $value === 'U' ? 'URBANO' : 'RURAL'
         );
     }
 }
