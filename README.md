@@ -20,7 +20,7 @@ Una base de datos tipo NoSQL como mongoDB y redundancia de datos pueden permitir
 
 d_estado -> name string(50) (mayusculas sin caracteres especiales)
 
-c_estado -> key numeric(2)
+c_estado -> id numeric(2) (Puede ser id porque no se repite)
 
 ?        -> code ?
 
@@ -29,11 +29,11 @@ c_estado -> key numeric(2)
 D_mnpio -> name string(100) (mayusculas 
 sin caracteres especiales)
 
-c_mnpio -> key numeric(3)
+c_mnpio -> key numeric(3) (No puede ser id ya que se reinicia la numeración por estado)
 
 **c. Codigo Postal -> zip_code**
 
-d_codigo -> zip_code string(5)
+d_codigo -> id string(5) (Puede ser id ya que es unico)
 
 d_ciudad -> locality string(100) (mayusculas sin caracteres especiales)
 
@@ -49,6 +49,7 @@ d_zona -> zone_type char(1) (propiedad calculada convertir el caracter a su corr
 e. Tipo de asentamiento -> settlement_type
 
 d_tipo_asenta -> name string(20)
+c_tipo_asenta -> id numeric(3,0) (puede ser llave primaria ya que no repiten)
 
 3. ### Se define un diagrama entidad-relación para la creacion de la base de datos.
 
