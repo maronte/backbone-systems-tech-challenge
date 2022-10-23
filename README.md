@@ -56,6 +56,33 @@ d_tipo_asenta -> name string(20)
 
 4. ### Se crean las migraciones en el proyecto de laravel.
 
+5. ### Se crea un lector del archivo CSV.
+
+El lector de CSV tendrá un generador que retorna una fila por cada iteración para no saturar la memoria del servidor. Adicionalmente a esto, el lector también tendrá un generador que retornar la cantidad de filas del csv dadas (1000) por defecto para poder insertar los registros de forma masiva y reducir el tiempo de procesamiento a base de datos.
+
+6. ### Se transforma el archivo CSV para tener la codificación UTF-8
+
+El archivo dado tiene una codificación ISO-8859-1
+que fue detectada con el comando:
+
+``` bash
+file --mime-encoding {rutaArchivo}
+```
+
+Y para parsearlo a UTF-8 y trabajar más fácilmente con el archivo se utilizó el siguiente comando:
+``` bash
+iconv --from-code=iso-8859-1 --to-code=utf-8 {rutaArchivo} > {rutaNuevoArchivo}
+```
+
+7. ### Se crea un procesador del archivo CSV.
+
+Dado que el archivo está ordeneado por todos los campos que nos interesan de él podemos iterar secuencialmente el archivo y una podemos estar seguro que una vez que cambia el estado de una fila a otra todos los asentamientos de ese estado fueron procesados, no habrá un asentamiento de ese estado posteriormente en el archivo. Este orden de igual manera aplica con municipio y codigo postal.
+También es válido suponer que los tipos de asentamiento son pocos, por el análisis del archivo de información. 
+
+Dados los hallazgos anteriormente mencionados podemos decir que no es necesario hacer consultas a la base de datos para saber que registros ya fueron insertados, por lo que podemos programar un procesador de fila del csv para poder acumular los registros y hacer inserciones masivas que aceleren el procesado de la información, de no ser así un insert por fila alentaría mucho el proceso.
+
+Dado un procesador de filas del csv este limpiará los datos al formato correcto y luego responderá qué entidades añadir a la lista de inserciones que no han sido procesadas.
+
 ### Ejemplo de respuesta esperada
 
 ``` JSON
