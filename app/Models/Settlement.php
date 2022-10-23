@@ -21,7 +21,7 @@ class Settlement extends Model
             'key' => $data['id_asenta_cpcons'],
             // Use first letter because it will be calculated property.
             'zone_type' => substr($data['d_zona'], 0, 1),
-            'settlement_type_id' => $data['c_tipo_asenta'], 0, 1,
+            'settlement_type_id' => $data['c_tipo_asenta'],
             'zip_code_id' => $data['d_codigo'],
         ];
     }

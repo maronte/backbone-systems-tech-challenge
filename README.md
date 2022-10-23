@@ -84,6 +84,13 @@ Dados los hallazgos anteriormente mencionados podemos decir que no es necesario 
 
 Dado un procesador de filas del csv este limpiará los datos al formato correcto y luego responderá qué entidades añadir a la lista de inserciones que no han sido procesadas.
 
+8. ### Database seeder
+
+Se crea un database seeder para insertar en la base de datos todos los registros
+procesados por el preprocesador de información. Agrupa todos los registros por tabla
+y de acuerdo al orden de creación de tablas (para no tener conflictos de llaves foráneas)
+se insertan los registros en masa por tabla.
+
 ### Ejemplo de respuesta esperada
 
 ``` JSON
