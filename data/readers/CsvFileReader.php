@@ -117,7 +117,7 @@ class CsvFileReader
                 $allLinesGenerator->next();
             }
             $thereAreLines = $allLinesGenerator->valid();
-            if ($thereAreLines) {
+            if ($thereAreLines || count($linesForIteration) > 0) {
                 yield $linesForIteration;
             }
         }
