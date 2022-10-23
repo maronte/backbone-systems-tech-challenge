@@ -1,0 +1,188 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Zip Codes API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/"
+        }
+    ],
+    "paths": {
+        "/api/zip-codes/{id}": {
+            "get": {
+                "tags": [
+                    "Zip Code"
+                ],
+                "summary": "Get Zip Code By Id",
+                "operationId": "12bbaa3af0c06c6e717ae46f2a2888f4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Zip code id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "minLength": 5
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show zip code",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/ZipCodeResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "FederalEntityResource": {
+                "title": "FederalEntityResource",
+                "description": "Federal entity resource model",
+                "properties": {
+                    "key": {
+                        "title": "key",
+                        "description": "ID",
+                        "type": "number",
+                        "example": "9"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of federal entity",
+                        "type": "string",
+                        "example": "CIUDAD DE MEXICO"
+                    },
+                    "code": {
+                        "title": "code",
+                        "description": "code of federal entity",
+                        "type": "null",
+                        "example": null
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "ZipCodeResource"
+                }
+            },
+            "MunicipalityResource": {
+                "title": "MunicipalityResource",
+                "description": "Municipality resource model",
+                "properties": {
+                    "key": {
+                        "title": "key",
+                        "description": "ID",
+                        "type": "number",
+                        "example": "25"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of settlement",
+                        "type": "string",
+                        "example": "ALVARO OBREGON"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "MunicipalityResource"
+                }
+            },
+            "SettlementResource": {
+                "title": "SettlementResource",
+                "description": "Settlement resource model",
+                "properties": {
+                    "key": {
+                        "title": "key",
+                        "description": "ID",
+                        "type": "number",
+                        "example": "25"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of settlement",
+                        "type": "string",
+                        "example": "LA OTRA BANDA"
+                    },
+                    "zone_type": {
+                        "title": "name",
+                        "description": "name of zone type of settlement",
+                        "type": "string",
+                        "example": "URBANO"
+                    },
+                    "settlement_type": {
+                        "$ref": "#/components/schemas/SettlementTypeResource"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "SettlementResource"
+                }
+            },
+            "SettlementTypeResource": {
+                "title": "SettlementTypeResource",
+                "description": "Settlement type resource model",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "name of settlement type",
+                        "type": "string",
+                        "example": "Barrio"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "SettlementTypeResource"
+                }
+            },
+            "ZipCodeResource": {
+                "title": "ZipCodeResource",
+                "description": "Zip code resource model",
+                "properties": {
+                    "zip_code": {
+                        "title": "zip_code",
+                        "description": "ID",
+                        "type": "string",
+                        "example": "01090"
+                    },
+                    "locality": {
+                        "title": "locality",
+                        "description": "locality name of zip code",
+                        "type": "string",
+                        "example": "CIUDAD DE MEXICO"
+                    },
+                    "federal_entity": {
+                        "$ref": "#/components/schemas/FederalEntityResource"
+                    },
+                    "settlements": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SettlementResource"
+                        }
+                    },
+                    "municipality": {
+                        "$ref": "#/components/schemas/MunicipalityResource"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "ZipCodeResource"
+                }
+            }
+        }
+    }
+}
