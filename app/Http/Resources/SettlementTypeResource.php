@@ -16,7 +16,7 @@ class SettlementTypeResource extends JsonResource
     {
         return [
             // Pase this line to javascript utf-8 format because it can have accents
-            'name' => json_encode($this->name),
+            'name' => trim(json_encode($this->name), '"'),
         ];
     }
 }
