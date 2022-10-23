@@ -52,3 +52,13 @@ it('has zip-codes endpoint', function () {
     $response = $this->get('/api/zip-codes/01090');
     $response->assertStatus(200)->assertJson($expectedResponse);
 });
+
+it('should return 404 error', function () {
+    $response = $this->get('/api/zip-codes/11111');
+    $response->assertStatus(404);
+});
+
+it('should return 500 error', function () {
+    $response = $this->get('/api/zip-codes/f?990');
+    $response->assertStatus(500);
+});
