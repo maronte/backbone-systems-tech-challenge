@@ -6,53 +6,42 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @OA\Schema(
- *     title="ZipCodeResource",
- *     description="Zip code resource model",
- *     @OA\Xml(
- *         name="ZipCodeResource"
- *     )
+ *  title="ZipCodeResource",
+ *  description="Zip code resource model",
+ *  @OA\Xml(
+ *      name="ZipCodeResource"
+ *  ),
+ *  @OA\Property(
+ *      property="zip_code",
+ *      title="zip_code",
+ *      description="ID",
+ *      example="01090",
+ *      type="string"
+ *  ),
+ *  @OA\Property(
+ *      property="locality",
+ *      title="locality",
+ *      description="name of the locality of the zip code",
+ *      example="CIUDAD DE MEXICO",
+ *      type="string"
+ *  ),
+ *  @OA\Property(
+ *      property="federal_entity",
+ *      ref="#/components/schemas/FederalEntityResource"
+ *  ),
+ *  @OA\Property(
+ *      property="settlements",
+ *      @OA\Items(ref="#/components/schemas/SettlementResource"),
+ *      type="array"
+ *  ),
+ *  @OA\Property(
+ *      property="municipality",
+ *      ref="#/components/schemas/MunicipalityResource"
+ *  )
  * )
  */
 class ZipCodeResource extends JsonResource
 {
-    /**
-     * @OA\Property(
-     *     title="zip_code",
-     *     description="ID",
-     *     example="01090",
-     *     type="string"
-     * )
-     */
-    private $zip_code;
-
-    /**
-     * @OA\Property(
-     *     title="locality",
-     *     description="locality name of zip code",
-     *     example="CIUDAD DE MEXICO",
-     *     type="string"
-     * )
-     */
-    private $locality;
-
-    /**
-     * @OA\Property(ref="#/components/schemas/FederalEntityResource")
-     */
-    private $federal_entity;
-
-    /**
-     * @OA\Property(
-     *     @OA\Items(ref="#/components/schemas/SettlementResource"),
-     *     type="array"
-     * )
-     */
-    private $settlements;
-
-    /**
-     * @OA\Property(ref="#/components/schemas/MunicipalityResource")
-     */
-    private $municipality;
-
     /**
      * The "data" wrapper that should be applied.
      *

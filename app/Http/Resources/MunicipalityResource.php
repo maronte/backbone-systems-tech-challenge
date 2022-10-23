@@ -6,35 +6,29 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @OA\Schema(
- *     title="MunicipalityResource",
- *     description="Municipality resource model",
- *     @OA\Xml(
- *         name="MunicipalityResource"
- *     )
+ *  title="MunicipalityResource",
+ *  description="Municipality resource model",
+ *  @OA\Xml(
+ *      name="MunicipalityResource"
+ *  ),
+ *  @OA\Property(
+ *      property="key",
+ *      title="key",
+ *      description="ID",
+ *      example="25",
+ *      type="number"
+ *  ),
+ *  @OA\Property(
+ *      property="name",
+ *      title="name",
+ *      description="name of municipality",
+ *      example="ALVARO OBREGON",
+ *      type="string"
+ *  )
  * )
  */
 class MunicipalityResource extends JsonResource
 {
-    /**
-     * @OA\Property(
-     *     title="key",
-     *     description="ID",
-     *     example="25",
-     *     type="number"
-     * )
-     */
-    private $key;
-
-    /**
-     * @OA\Property(
-     *     title="name",
-     *     description="name of settlement",
-     *     example="ALVARO OBREGON",
-     *     type="string"
-     * )
-     */
-    private $name;
-
     /**
      * Transform the resource into an array.
      *

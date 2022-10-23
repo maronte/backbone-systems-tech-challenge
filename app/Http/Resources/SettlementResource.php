@@ -6,52 +6,40 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @OA\Schema(
- *     title="SettlementResource",
- *     description="Settlement resource model",
- *     @OA\Xml(
- *         name="SettlementResource"
- *     )
+ *  title="SettlementResource",
+ *  description="Settlement resource model",
+ *  @OA\Xml(
+ *      name="SettlementResource"
+ *  ),
+ *  @OA\Property(
+ *      property="key",
+ *      title="key",
+ *      description="ID",
+ *      example="25",
+ *      type="number"
+ *  ),
+ *  @OA\Property(
+ *      property="name",
+ *      title="name",
+ *      description="name of settlement",
+ *      example="LA OTRA BANDA",
+ *      type="string"
+ *  ),
+ *  @OA\Property(
+ *     property="zone_type",
+ *     title="zone_type",
+ *     description="name of zone type of settlement",
+ *     example="URBANO",
+ *     type="string"
+ *  ),
+ *  @OA\Property(
+ *      property="settlement_type",
+ *      ref="#/components/schemas/SettlementTypeResource"
+ *  )
  * )
  */
 class SettlementResource extends JsonResource
 {
-    /**
-     * @OA\Property(
-     *     title="key",
-     *     description="ID",
-     *     example="25",
-     *     type="number"
-     * )
-     */
-    private $key;
-
-    /**
-     * @OA\Property(
-     *     title="name",
-     *     description="name of settlement",
-     *     example="LA OTRA BANDA",
-     *     type="string"
-     * )
-     */
-    private $name;
-
-    /**
-     * @OA\Property(
-     *     title="name",
-     *     description="name of zone type of settlement",
-     *     example="URBANO",
-     *     type="string"
-     * )
-     */
-    private $zone_type;
-
-    /**
-     * @OA\Property(
-     *  ref="#/components/schemas/SettlementTypeResource"
-     * )
-     */
-    private $settlement_type;
-
     /**
      * Transform the resource into an array.
      *

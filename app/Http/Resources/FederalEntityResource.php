@@ -6,45 +6,36 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @OA\Schema(
- *     title="FederalEntityResource",
- *     description="Federal entity resource model",
- *     @OA\Xml(
- *         name="ZipCodeResource"
- *     )
+ *  title="FederalEntityResource",
+ *  description="FederalEntity resource model",
+ *  @OA\Xml(
+ *      name="FederalEntityResource"
+ *  ),
+ *  @OA\Property(
+ *      property="key",
+ *      title="key",
+ *      description="ID",
+ *      example="9",
+ *      type="number"
+ *  ),
+ *  @OA\Property(
+ *      property="name",
+ *      title="name",
+ *      description="name of federal entity",
+ *      example="CIUDAD DE MEXICO",
+ *      type="string"
+ *  ),
+ *  @OA\Property(
+ *      property="code",
+ *      title="code",
+ *      description="code of federal entity",
+ *      example=null,
+ *      type="null"
+ *  )
  * )
  */
 class FederalEntityResource extends JsonResource
 {
-    /**
-     * @OA\Property(
-     *     title="key",
-     *     description="ID",
-     *     example="9",
-     *     type="number"
-     * )
-     */
-    private $key;
-
-    /**
-     * @OA\Property(
-     *     title="name",
-     *     description="name of federal entity",
-     *     example="CIUDAD DE MEXICO",
-     *     type="string"
-     * )
-     */
-    private $name;
-
-    /**
-     * @OA\Property(
-     *     title="code",
-     *     description="code of federal entity",
-     *     example=null,
-     *     type="null"
-     * )
-     */
-    private $code;
-
     /**
      * Transform the resource into an array.
      *
