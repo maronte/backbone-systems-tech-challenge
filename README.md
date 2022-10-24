@@ -1,5 +1,72 @@
 # Backbone systems, pruebas técnica
 
+## Descripción
+
+Este proyecto es una prueba técnica con instrucciones disponibles en [este link](https://jobs.backbonesystems.io/challenge/1) y consta de una API de un solo endpoint que como recurso base es un objeto que detalla un código postal de la México. Contiene todos los códigos postales existentes gracias a la información recabada de [Correos de México](https://www.correosdemexico.gob.mx/SSLServicios/ConsultaCP/CodigoPostal_Exportar.aspx). 
+
+Cada código postal contiene un estado, un municipio, un conjunto de asentamientos pertenecientes al código postal y cada asentamiento tiene su tipo.
+
+Este proyecto tiene un lector de CSV personalizado para acelerar el llenado de la base de datos, junto con un procesador de filas del csv que aprovecha el hecho de que los datos están ordenados para de igual manera acelerar el proceso de llenado del CSV sin saturar la memoria del hardware que ejecute la app.
+
+### Lector de CSV
+
+El lector de CSV aprovecha el uso de los generadores, para leer una fila por iteración, pero además permite acumular una cantidad de filas dada para acelerar el proceso de inserción en la base de datos, ya que leyendo uno a uno se tendrían que generar hasta 5 queries de inserción por cada fila del CSV y otras adicionales para verificar que el registro dado no exista.
+
+### Procesador del filas del archivo CSV
+
+El procesador del CSV es una clase que formatea los datos a lo esperado y marcado en el ejemplo de la prueba técnica, a su vez mapea los datos del csv a propiedades del modelo de la base de datos definido (Disponible en la descripción de resolución del reto). Gracias a que los datos están ordenados por estado, municipio, y codigo postal puede verificar qué modelos ya se procesaron y cuales no para clasificarlos y acumularlos por tipo para hacer inserciones masivas que permitan acelerar el tiempo de procesamiento del archivo.
+
+### Database seeder
+
+Se construyó un database seeder personalizado haciendo uso de las anteriores features que lee 1000 filas por iteración e inserta en masa los registros para cada tabla y en orden para respetar las relaciones de las tablas.
+
+#### Servicio REST de códigos postales
+### Recursos API
+
+Se añadieron recursos API de laravel para formatear los modelos de base de datos a el recurso expuesto en la API que se espera según la prueba técnica. A su vez cada recurso contiene documentación para poderlos representar en documentación de API con Swagger.
+
+### Controlador
+
+El controlador del servicio rest valida con una expresión regular que el codigo postal dado sea realmente un codigo postal, para este caso sería mejor retornar un error de tipo 400, pero la prueba indica 502 para esos casos y por eso se mantuvo ese error.
+
+Para consultar la información de la base de datos se uso el ORM y las relaciones mediante eager loading. Se hace uso del metodo where en lugar de findOrFail para evitar conflictos con el tipo de dato del id de codigos postales, ya que es un string. 
+
+Para el caso de errores 404 se hace explicítamente la comprobación de existencia del recurso ya que el metodo que firstOrFail no retornar directamente un error 404, pero en caso de crecer el sistema fácilmente se puede hacer el refactor para retornar un 404 automáticamente con el tipo de excepción retornada por dicho método. De igual manera sería más conveniente retornar JSON para estos errores pero por fines de pruebas y para mantener la compatibilidad con el ejemplo se dejarán como respuestas HTML.
+
+### Testing
+
+Cada feature o clase desarrollada para el proyecto tiene su correspondiente test de integración o unitario haciendo uso del framework pest (una simplificación de PHPUnit).
+
+## Como usar el proyecto
+
+### Setup del proyecto
+
+Correr los siguientes comandos si es la primera vez:
+
+``` shell
+$ composer install # Instala dependencias
+$ ./vendor/bin/sail up # Configuracion inicial de docker con sail
+$ alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail' # Crea alias para laravel sail
+$ sail artisan migrate # Configura la base de datos
+$ sail artisan db:seed # Llena la base de datos con la información de base de datos
+```
+
+Para volver a correr el servicio unicamente hay que correr:
+``` shell
+$ ./vendor/bin/sail up # Configuracion inicial de docker con sail
+```
+
+Para correr los tests solamente (con el proyecto ya iniciado) basta con correr el comando:
+La base de datos de tests es sqlite en memoria, por lo que no entra en conflicto con la base de datos de desarrollo local.
+``` shell
+$ sail test
+```
+
+### CI/CD
+
+Este proyecto se encuentra alojado en github y corre automáticamente todos los tests
+con un workflow al crear un PR en la rama main, de igual manera formatea automáticamente el proyecto con la dependencia pint. Una vez que se hace un commit en la rama main el proyecto será automáticamente actualizado en railway.app
+
 ## Proceso de resolución
 
 1. ### Analizar fuente de datos.
