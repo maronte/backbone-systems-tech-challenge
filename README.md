@@ -67,6 +67,13 @@ $ sail test
 Este proyecto se encuentra alojado en github y corre automáticamente todos los tests
 con un workflow al crear un PR en la rama main, de igual manera formatea automáticamente el proyecto con la dependencia pint. Una vez que se hace un commit en la rama main el proyecto será automáticamente actualizado en railway.app
 
+### API Documentation
+Este proyecto usa Swagger para documentar la API, si requieres publicar la documentacion basta con ejecutar los siguientes comandos:
+``` bash
+$ php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider" # Configurar swagger con laravel
+$ php artisan l5-swagger:generate # Genera los archivos de documentacion
+```
+Estos archivos son automáticamente desplegados y actualizados en producción.
 ## Proceso de resolución
 
 1. ### Analizar fuente de datos.
