@@ -8,8 +8,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @OA\Info(title="Zip Codes API", version="1.0")
- *
- * @OA\Server(url="http://127.0.0.1:8000/")
  */
 class ZipCodesController extends Controller
 {
